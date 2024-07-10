@@ -1,5 +1,4 @@
 "use client";
-import { useState, useEffect } from "react";
 import { Button, buttonVariants } from "@/components/ui/button";
 import {
   Card,
@@ -10,10 +9,11 @@ import {
   CardTitle,
 } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
-import { Label } from "@radix-ui/react-label";
 import Link from "next/link";
 import { redirect } from "next/navigation";
 import AuthActions from "@/modules/auth/actions/auth-actions";
+import { useEffect, useState } from "react";
+import { Label } from "@/components/ui/label";
 
 export default function SignUpForm() {
   const [error, setError] = useState<string | null>(null);

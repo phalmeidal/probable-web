@@ -3,7 +3,7 @@ async function createAccount(formData: FormData) {
   const email = formData.get("email") as string;
   const password = formData.get("password") as string;
 
-  const response = await fetch("http://127.0.0.1:5000/users/create", {
+  const response = await fetch("http://localhost:5000/users/create", {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
@@ -23,12 +23,13 @@ async function createAccount(formData: FormData) {
     return false;
   }
 }
+
 async function login(formData: FormData) {
   const email = formData.get("email") as string;
   const password = formData.get("password") as string;
 
-  const response = await fetch(`http://127.0.0.1:5000/users/${email}`, {
-    method: "GET",
+  const response = await fetch(`http://127.0.0.1:5000/users/login`, {
+    method: "POST",
     headers: {
       Accept: "application/json",
       "Content-Type": "application/json",
@@ -41,7 +42,8 @@ async function login(formData: FormData) {
 
   if (response.ok) {
     const data = await response.json();
-    console.log("Login successful:", data);
+    const token = data.access_token;
+    document.cookie = `token=${token}; path=/`;
     return true;
   } else {
     const errorData = await response.json();
@@ -50,8 +52,16 @@ async function login(formData: FormData) {
   }
 }
 
+function logout() {
+  document.cookie = "token=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
+  return true;
+}
+
+
 const AuthActions = {
   createAccount,
+  login,
+  logout,
 };
 
 export default AuthActions;
