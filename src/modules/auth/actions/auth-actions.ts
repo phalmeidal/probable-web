@@ -9,9 +9,9 @@ async function createAccount(formData: FormData) {
       "Content-Type": "application/json",
     },
     body: JSON.stringify({
-      userName: name,
-      userEmail: email,
-      userPasswd: password,
+      user_name: name,
+      user_email: email,
+      user_passwd: password,
     }),
   });
 
@@ -35,8 +35,8 @@ async function login(formData: FormData) {
       "Content-Type": "application/json",
     },
     body: JSON.stringify({
-      userEmail: email,
-      userPasswd: password,
+      user_email: email,
+      user_passwd: password,
     }),
   });
 
@@ -56,7 +56,6 @@ function logout() {
   document.cookie = "token=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
   return true;
 }
-
 
 const AuthActions = {
   createAccount,
